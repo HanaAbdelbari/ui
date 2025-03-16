@@ -1,0 +1,28 @@
+<!-- Rating Summary -->
+<app-rating-summary [overallRating]="averageRating" [totalReviews]="reviews.length"></app-rating-summary>
+
+<!-- Review Cards -->
+<div *ngFor="let review of reviews" class="review-card">
+  <mat-card>
+    <mat-card-header>
+      <div class="avatar-container">
+        <img class="avatar" [src]="review.avatar" alt="User Avatar">
+      </div>
+      <div class="review-header">
+        <mat-card-title class="review-title">{{ review.title }}</mat-card-title>
+        <mat-card-subtitle class="review-author">{{ review.name }}</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="stars">
+        <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+          <mat-icon class="star" *ngIf="i < review.rating">star</mat-icon>
+          <mat-icon class="star" *ngIf="i >= review.rating">star_border</mat-icon>
+        </ng-container>
+      </div>
+      <p class="review-comment">{{ review.comment }}</p>
+      <p class="review-date">{{ review.date }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

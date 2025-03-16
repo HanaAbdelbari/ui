@@ -1,0 +1,17 @@
+.rating-summary {
+  text-align: center;
+  .rating-value {
+    font-size: 2.5em;
+    margin: 0;
+  }
+  .stars {
+    color: gold;
+    .star {
+      font-size: 2em;
+    }
+  }
+  .total-reviews {
+    font-size: 1em;
+    color: gray;
+  }
+}

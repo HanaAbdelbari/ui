@@ -1,0 +1,17 @@
+<div class="app-container">
+  <!-- Rating Summary -->
+  <app-rating-summary
+    [overallRating]="overallRating"
+    [totalReviews]="reviews.length"
+    [ratingDistribution]="ratingDistribution">
+  </app-rating-summary>
+
+  <!-- Review List -->
+  <app-review-list
+    [reviews]="reviews"
+    (reviewAdded)="addReview($event)">
+  </app-review-list>
+
+  <!-- Review Form -->
+  <app-review-form (reviewAdded)="addReview($event)"></app-review-form>
+</div>

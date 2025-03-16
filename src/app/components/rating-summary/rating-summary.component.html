@@ -1,0 +1,10 @@
+<div class="rating-summary">
+  <h1 class="rating-value">{{ overallRating | number: '1.1-1' }}</h1>
+  <div class="stars">
+    <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+      <mat-icon class="star" *ngIf="i < overallRating">star</mat-icon>
+      <mat-icon class="star" *ngIf="i >= overallRating">star_border</mat-icon>
+    </ng-container>
+  </div>
+  <p class="total-reviews">({{ totalReviews }} تقييم)</p>
+</div>
