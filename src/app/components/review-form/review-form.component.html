@@ -1,26 +1,45 @@
-<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+  <h2 class="form-title">إضافة تقييم</h2>
+
   <!-- Title Field -->
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="full-width">
     <mat-label>عنوان التقييم</mat-label>
-    <input matInput formControlName="title" name="title" required>
+    <input matInput formControlName="title" required>
+    <mat-error *ngIf="reviewForm.get('title')?.invalid && reviewForm.get('title')?.touched">
+      هذا الحقل مطلوب
+    </mat-error>
   </mat-form-field>
 
   <!-- Name Field -->
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="full-width">
     <mat-label>اسمك</mat-label>
-    <input matInput formControlName="name" name="name" required>
+    <input matInput formControlName="name" required>
+    <mat-error *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched">
+      هذا الحقل مطلوب
+    </mat-error>
   </mat-form-field>
 
   <!-- Comment Field -->
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="full-width">
     <mat-label>تعليقك</mat-label>
-    <textarea matInput formControlName="comment" name="comment" required></textarea>
+    <textarea matInput formControlName="comment" required></textarea>
+    <mat-error *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched">
+      هذا الحقل مطلوب
+    </mat-error>
   </mat-form-field>
 
-  <!-- Rating Slider -->
-  <mat-slider formControlName="rating" min="1" max="5" step="1" name="rating"></mat-slider>
-  <span>{{ reviewForm.value["rating"] }} ⭐</span>
+  <!-- Rating Selector -->
+  <div class="rating-container">
+    <label>التقييم:</label>
+    <mat-slider [formControl]="ratingControl" min="1" max="5" step="1"></mat-slider>
+
+
+    <span>{{ reviewForm.value["rating"] }} ⭐</span>
+  </div>
 
   <!-- Submit Button -->
-  <button mat-raised-button color="primary" type="submit" [disabled]="reviewForm.invalid">إرسال التقييم</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="reviewForm.invalid" class="submit-btn">
+    إرسال التقييم
+
+  </button>
 </form>

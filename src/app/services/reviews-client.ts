@@ -8,7 +8,7 @@ export class Configuration {
 }
 
 // Define the structure of a review
-export interface Review {
+export interface Reviewclient {
   id: string;
   serviceId: string;
   clientId: string;
@@ -28,23 +28,23 @@ export class ReviewsService {
   }
 
   // Fetch all reviews with optional filters
-  getReviews(filters: Partial<Review> = {}): Observable<Review[]> {
-    return this.http.get<Review[]>(this.apiUrl, { params: filters as any });
+  getReviews(filters: Partial<Reviewclient> = {}): Observable<Reviewclient[]> {
+    return this.http.get<Reviewclient[]>(this.apiUrl, { params: filters as any });
   }
 
   // Get a single review by ID
-  getReviewById(id: string): Observable<Review> {
-    return this.http.get<Review>(`${this.apiUrl}/${id}`);
+  getReviewById(id: string): Observable<Reviewclient> {
+    return this.http.get<Reviewclient>(`${this.apiUrl}/${id}`);
   }
 
   // Create a new review
-  createReview(review: Review): Observable<Review> {
-    return this.http.post<Review>(this.apiUrl, review);
+  createReview(review: Reviewclient): Observable<Reviewclient> {
+    return this.http.post<Reviewclient>(this.apiUrl, review);
   }
 
   // Update an existing review
-  updateReview(review: Review): Observable<Review> {
-    return this.http.put<Review>(`${this.apiUrl}/${review.id}`, review);
+  updateReview(review: Reviewclient): Observable<Reviewclient> {
+    return this.http.put<Reviewclient>(`${this.apiUrl}/${review.id}`, review);
   }
 
   // Delete a review

@@ -11,8 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingSummaryComponent } from './components/rating-summary/rating-summary.component';
+import {Reviewsservice} from './services/reviews.service';
 
-export interface Review {
+export interface Reviewcomponent {
   title: string;
   name: string;
   comment: string;
@@ -28,7 +29,7 @@ export interface Review {
     ReviewFormComponent,
     ReviewListComponent,
     RatingSummaryComponent,
-    RouterOutlet,
+
     MatIconModule,
     MatSliderModule,
     MatFormFieldModule,
@@ -46,15 +47,18 @@ export class AppComponent {
   title(title: any) {
       throw new Error('Method not implemented.');
   }
-  reviews: Review[] = [];
+  reviews: Reviewcomponent[] = [];
   overallRating: number = 0;
   ratingDistribution: { [key: string]: number } = { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 };
 
-  addReview(newReview: Review): void {
+  addReview(newReview: Reviewsservice): void {
+    // @ts-ignore
     this.reviews.push(newReview);
     this.overallRating = this.calculateOverallRating();
     this.ratingDistribution = this.calculateRatingDistribution();
   }
+
+
 
   calculateOverallRating(): number {
     const totalRating = this.reviews.reduce((sum, review) => sum + review.rating, 0);

@@ -1,10 +1,23 @@
-<div class="rating-summary">
-  <h1 class="rating-value">{{ overallRating | number: '1.1-1' }}</h1>
-  <div class="stars">
-    <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
-      <mat-icon class="star" *ngIf="i < overallRating">star</mat-icon>
-      <mat-icon class="star" *ngIf="i >= overallRating">star_border</mat-icon>
-    </ng-container>
+<div class="rating-summary" *ngIf="overallRating !== null && totalReviews !== null">
+  <div class="rating-overall">
+    <h1 class="rating-value">{{ overallRating | number: '1.1-1' }}</h1>
+    <p class="total-reviews">({{ totalReviews }} تقييم)</p>
+    <div class="stars">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <mat-icon class="star" [ngClass]="{ filled: i < Math.round(overallRating) }">
+          {{ i < Math.round(overallRating) ? 'star' : 'star_border' }}
+        </mat-icon>
+      </ng-container>
+    </div>
   </div>
-  <p class="total-reviews">({{ totalReviews }} تقييم)</p>
+
+  <div class="rating-bars">
+    <div *ngFor="let level of [5, 4, 3, 2, 1]" class="rating-bar">
+      <span>{{ level }}</span>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="getRatingPercentage(level) || 0"
+      ></mat-progress-bar>
+    </div>
+  </div>
 </div>

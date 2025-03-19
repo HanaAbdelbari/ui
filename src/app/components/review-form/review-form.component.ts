@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { ReviewsService, Review } from '../../services/reviews.service';
-import { MatSlider } from '@angular/material/slider';
+import { ReviewsService, Reviewsservice } from '../../services/reviews.service';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'app-review-form',
@@ -14,22 +14,21 @@ import { MatSlider } from '@angular/material/slider';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    FormsModule,
-    MatSlider
+    MatSliderModule
   ],
   providers: [ReviewsService],
   templateUrl: './review-form.component.html',
   styleUrls: ['./review-form.component.scss']
 })
-
 export class ReviewFormComponent {
   reviewForm: FormGroup;
 
-  @Output() reviewAdded = new EventEmitter<Review>();
+  @Output() reviewAdded = new EventEmitter<Reviewsservice>();
 
   constructor(private fb: FormBuilder, private reviewsService: ReviewsService) {
     this.reviewForm = this.fb.group({
@@ -40,11 +39,22 @@ export class ReviewFormComponent {
     });
   }
 
+  get ratingControl(): FormControl {
+    return this.reviewForm.get('rating') as FormControl;
+  }
+
   onSubmit(): void {
     if (this.reviewForm.valid) {
-      const newReview: Review = this.reviewForm.value;
+      // Ensure required properties exist
+      const newReview: Reviewsservice = {
+        clientId: 'temp-id', // Replace with actual client ID logic
+        reviewType: 'package', // Example type
+        serviceId: 'temp-service', // Replace with actual service logic
+        ...this.reviewForm.value
+      };
+
       this.reviewsService.createReview(newReview).subscribe(() => {
-        this.reviewForm.reset({ rating: 5 });
+        this.reviewForm.reset({ rating: 5 }, { emitEvent: false }); // Prevent validation issues
         this.reviewAdded.emit(newReview);
       });
     }

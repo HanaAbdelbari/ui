@@ -1,22 +1,43 @@
-.review-form-container {
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form {
+.review-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: auto;
 }
 
-mat-form-field {
+.form-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.full-width {
   width: 100%;
 }
 
-button {
-  align-self: flex-start;
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .review-form {
+    padding: 15px;
+  }
+  .submit-btn {
+    font-size: 14px;
+  }
 }
